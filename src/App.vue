@@ -11,6 +11,7 @@
       <img :src="'/cartier1.webp'" alt="image">
       <h1>{{ titre1 }}</h1>
     </div>
+
 <Session2/>
   </main>
 
@@ -43,8 +44,7 @@ main{
 min-height: 55vh;
 margin-top: 2rem;
 margin: 0 auto;
-padding: 2rem;
-
+padding: 1rem;
 }
 
 .presentation{
