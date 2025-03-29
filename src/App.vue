@@ -13,6 +13,7 @@
     </div>
 
 <Session2/>
+<Session3/>
   </main>
 
 </template>
@@ -21,6 +22,7 @@
 <script >
 import Navbar from './components/Navbar.vue';
 import Session2 from './components/Session2.vue';
+import Session3 from './components/Session3.vue';
 
 
 export default{
@@ -28,7 +30,7 @@ export default{
   components:{
     Navbar,
     Session2,
-    Session2
+    Session3
 },
   data(){
     return{
@@ -45,10 +47,11 @@ min-height: 55vh;
 margin-top: 2rem;
 margin: 0 auto;
 padding: 1rem;
+
 }
 
 .presentation{
-  width: 95%;
+  max-width: 95%;
   margin: 0 auto;
 }
 img{

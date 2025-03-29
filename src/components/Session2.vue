@@ -24,7 +24,8 @@ export default{
 <style scoped>
 
 .session1{
- padding-left: 2.3rem;
+ max-width: 95%;
+ margin: 0 auto;
  display: flex;
 
 
@@ -45,8 +46,8 @@ p{
     width: 40%;
     font-weight: 300;
     font-family:"Inter", sans-serif;
- font-weight: 200; 
- text-align: justify;
+    font-weight: 200; 
+    text-align: justify;
 
 
 }

@@ -20,7 +20,7 @@ export default{
 
 nav{
   width: 100%;
-  max-width: 1500px;
+  max-width: 1600px;
   padding: 1rem;
 }
 nav ul{
