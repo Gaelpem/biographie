@@ -1,27 +1,29 @@
 <template>
-    <div class="awards-list">
+    <div class="photos-list">
       <div 
-        v-for="(award, index) in awards" 
+        v-for="(photo, index) in photos" 
         :key="index" 
-        class="award"
+        class="photo"
         @mouseenter="showImage(index, $event)"
-        @mouseleave="hideImage"
+        @mouseleave="hideImage(index)"
       >
-        <div class="award-wrapper">
-          <div class="award-name">
-            <h1>{{ award.name }}</h1>
-            <h1>{{ award.type }}</h1>
+        <div class="photo-wrapper">
+          <div class="photo-name">
+            <h1>{{ photo.name }}</h1>
+            <h1>{{ photo.type }}</h1>
           </div>
         </div>
       </div>
-    </div>
   
-    <img 
-      v-if="currentImg" 
-      :src="currentImg" 
-      :alt="`Award ${currentIndex + 1}`" 
-      :style="imgStyle"
-    />
+      <!-- Afficher les images dynamiquement -->
+      <img 
+        v-for="(img, idx) in activeImages" 
+        :key="idx" 
+        :src="img.src" 
+        :alt="img.alt" 
+        :style="img.style"
+      />
+    </div>
   </template>
   
   <script>
@@ -30,68 +32,70 @@
   
   export default {
     setup() {
-      // Liste des awards
-      const awards = ref([
+      // Liste des awards (identique à ton tableau)
+      const photos = ref([
         { name: "Photo One", type: "Children" },
         { name: "Photo Two", type: "Silver" },
         { name: "Photo Three", type: "Portrait" },
         { name: "Photo Four", type: "People" },
       ]);
   
-      // Image actuelle affichée
-      const currentImg = ref(null);
-      const currentIndex = ref(null);
-      const imgStyle = ref({});
+      // Tableau pour stocker les images actives
+      const activeImages = ref([]);
+      const imageExtensions = ['.jpg', '.webp', '.webp', '.jpg'];
   
-      // Tableau des extensions d’image
-      const imageExtensions = [".jpg", ".webp", ".webp", ".jpg"];
-  
-      // Afficher l'image quand la souris entre
+      // Afficher l'image au survol
       const showImage = (index, e) => {
         const imgNumber = index + 1;
-        const imgExtension = imageExtensions[index] || ".jpg";
-        currentImg.value = `/img/${imgNumber}${imgExtension}`;
-        currentIndex.value = index;
+        const imgExtension = imageExtensions[index] || '.jpg';
   
-        // Positionner l’image sous la souris
-        imgStyle.value = {
-          position: "absolute",
-          top: `${e.clientY - 100}px`,
-          left: `${e.clientX - 100}px`,
-          width: "400px",
-          height: "400px",
-          objectFit: "cover",
-          zIndex: 1000,
-          pointerEvents: "none",
-          scale: 0, // Initialement caché
+        // Créer un objet pour l'image
+        const newImg = {
+          src: `./img/${imgNumber}${imgExtension}`,
+          alt: `Award ${imgNumber}`,
+          style: {
+            position: "absolute",
+            top: `${e.clientY - (-450)}px`, // Centre l'image sur la souris
+            left: `${e.clientX - 100}px`,
+            width: "400px",
+            height: "400px",
+            objectFit: "cover",
+            scale: "0",
+            zIndex: 1000,
+          },
+          index: index, // Pour identifier quelle image supprimer
         };
   
-        // Animation GSAP pour agrandir l'image
-        gsap.to(imgStyle.value, {
+        // Ajouter l'image au tableau
+        activeImages.value.push(newImg);
+  
+        // Animer l'image avec GSAP
+        gsap.to(newImg.style, {
           scale: 1,
           duration: 0.4,
           ease: "power2.out",
         });
       };
   
-      // Cacher l’image quand la souris sort
-      const hideImage = () => {
-        gsap.to(imgStyle.value, {
-          scale: 0,
-          duration: 0.4,
-          ease: "power2.out",
-          onComplete: () => {
-            currentImg.value = null;
-            currentIndex.value = null;
-          },
-        });
+      // Cacher l'image quand la souris quitte
+      const hideImage = (index) => {
+        const imgToRemove = activeImages.value.find(img => img.index === index);
+        if (imgToRemove) {
+          gsap.to(imgToRemove.style, {
+            scale: 0,
+            duration: 0.4,
+            ease: "power2.out",
+            onComplete: () => {
+              // Supprimer l'image du tableau après l'animation
+              activeImages.value = activeImages.value.filter(img => img.index !== index);
+            },
+          });
+        }
       };
   
       return {
-        awards,
-        currentImg,
-        currentIndex,
-        imgStyle,
+        photos,
+        activeImages,
         showImage,
         hideImage,
       };
@@ -100,61 +104,72 @@
   </script>
   
   <style scoped>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
   
-img{
+  body {
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  img {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
     will-change: transform;
-
-}
-
-h1{
+  }
+  
+  h1 {
     text-transform: uppercase;
     font-size: 72px;
     line-height: 0.9;
-}
-
-p{
-    text-transform: uppercase; 
+  }
+  
+  p {
+    text-transform: uppercase;
     font-size: 1.5rem;
     font-weight: 700;
-}
-
-section{
-    position:relative; 
+  }
+  
+  section {
+    position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-}
-
-
-.awards{
+  }
+  
+  .photos {
     min-height: 100vh;
-  height: max;
-}
-
-.awards p{
+    height: max;
+  }
+  
+  .photos p {
     padding: 5px 20px;
-}
-
-.awards-list{
-    border: 0.5px solid #000;
-}
-.award{
+  }
+  
+  .photos-list {
+    margin-top: 4.5rem;
+    border-top: 0.5px solid white;
+ 
+  }
+  
+  .photo {
     height: 80px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
-.award-wrapper{
+  }
+  
+  .photo-wrapper {
     position: relative;
     height: 240px;
     will-change: transform;
     transform: translateY(0);
-}
-
-.award-name{
+  }
+  
+  .photo-name {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -162,16 +177,11 @@ section{
     height: 80px;
     padding: 5px 15px;
     cursor: pointer;
-    border-bottom: 1px solid #000;
-    background-color: #ffffff;
-    color: #000000;
-    transition:all  0.6s ease-out;
-}
-
-.award-name:hover{
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-}
+    border-bottom: 0.5px solid #ffffff;
+    background-color: #000000;
+    color: #ffffff;
+    transition: all 0.6s ease-out;
+  }
+  
 
   </style>
-  
