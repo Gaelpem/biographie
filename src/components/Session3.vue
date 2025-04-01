@@ -34,10 +34,10 @@
     setup() {
       // Liste des awards (identique à ton tableau)
       const photos = ref([
-        { name: "Photo One", type: "Children" },
-        { name: "Photo Two", type: "Silver" },
-        { name: "Photo Three", type: "Portrait" },
-        { name: "Photo Four", type: "People" },
+        { name: "01", type: "Children" },
+        { name: "02", type: "Silver" },
+        { name: "03", type: "Portrait" },
+        { name: "04", type: "People" },
       ]);
   
       // Tableau pour stocker les images actives
@@ -55,7 +55,7 @@
           alt: `Award ${imgNumber}`,
           style: {
             position: "absolute",
-            top: `${e.clientY - (-450)}px`, // Centre l'image sur la souris
+            top: `${e.clientY - (-400)}px`, // Centre l'image sur la souris
             left: `${e.clientX - 100}px`,
             width: "400px",
             height: "400px",
