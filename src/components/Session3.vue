@@ -1,4 +1,15 @@
 <template>
+  <div class="container"> 
+
+    <div class="container-rond">
+        <div class="rond one"></div>
+        <div class="rond two"></div>
+        <div class="rond three"></div>
+        <div class="rond fourth"></div> 
+        <div class="rond five"></div>
+        <div class="rond six"></div>
+    </div>
+
   <div class="photo-container">
     <h1 class="title">{{ title }}</h1>
     <div class="photos-list">
@@ -29,6 +40,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -132,20 +144,23 @@ export default {
 </script>
 
 <style scoped>
-.photo-container {
+.container{
   margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+.photo-container {
+  margin-top: -17rem;
   display: flex; 
   flex-direction: column;
   margin-left: 30rem;
+  
 }
 
 .title {
   color: white;
   font-size: 7rem;
-  border-bottom: 0.5px solid rgb(255, 255, 255); 
-  padding-bottom: 1rem;
-  display: inline-block;
-  max-width: max-content;
+  border-top: 0.7px solid white;
   font-family:  "Imbue", serif;
 }
 
@@ -205,4 +220,26 @@ h1 {
   border-radius: 5px;
   transition: all 0.3s ease;
 }
+
+
+.container-rond{
+  display: grid;
+   grid-template-columns:repeat(4,100px);
+   width: max-content;
+   gap: 6.3rem;
+   
+}
+.rond{
+   background-color: rgb(255, 255, 255) ;
+   border-radius: 50%;
+   width: 200px;
+   height: 200px;
+   
+}
+
+.fourth, .two, .one{
+  background:none;
+  border: 1px solid  white;
+}
+
 </style>

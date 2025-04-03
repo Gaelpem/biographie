@@ -25,6 +25,7 @@
 import Navbar from './components/Navbar.vue';
 import Session2 from './components/Session2.vue';
 import Session3 from './components/Session3.vue';
+import Session4 from './components/Session3.vue';
 
 
 export default{
@@ -32,7 +33,8 @@ export default{
   components:{
     Navbar,
     Session2,
-    Session3
+    Session3, 
+    Session4
 },
   data(){
     return{
