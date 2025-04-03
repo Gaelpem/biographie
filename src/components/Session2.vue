@@ -80,7 +80,8 @@ onMounted(() => {
 
 <style scoped>
 .description {
-  padding: 1px;
+  padding: 2px;
+  margin-top: 1rem;
 }
 
 
@@ -95,7 +96,7 @@ onMounted(() => {
   font-size: 2.7rem;
   font-family: "Inter", sans-serif;
   font-weight: 500;
-  max-width: 90%;
+  width: 80%;
 
 }
 

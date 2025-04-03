@@ -1,5 +1,5 @@
 <template>
-  <div class="container"> 
+
 
     <div class="container-rond">
         <div class="rond one"></div>
@@ -40,7 +40,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -144,16 +143,12 @@ export default {
 </script>
 
 <style scoped>
-.container{
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: column;
-}
+
 .photo-container {
-  margin-top: -17rem;
   display: flex; 
   flex-direction: column;
   margin-left: 30rem;
+  margin-top: 3rem;
   
 }
 
@@ -221,25 +216,5 @@ h1 {
   transition: all 0.3s ease;
 }
 
-
-.container-rond{
-  display: grid;
-   grid-template-columns:repeat(4,100px);
-   width: max-content;
-   gap: 6.3rem;
-   
-}
-.rond{
-   background-color: rgb(255, 255, 255) ;
-   border-radius: 50%;
-   width: 200px;
-   height: 200px;
-   
-}
-
-.fourth, .two, .one{
-  background:none;
-  border: 1px solid  white;
-}
 
 </style>
