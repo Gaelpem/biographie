@@ -34,6 +34,7 @@ li a{
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
-    font-family:Arial, Helvetica, sans-serif
+    font-weight: 200;
+    font-family:"Inter", sans-serif; 
 }
 </style>

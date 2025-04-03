@@ -46,15 +46,14 @@ export default{
 
 main{
 min-height: 55vh;
-margin-top: 2rem;
-margin: 0 auto;
-padding: 1rem;
+margin: 0 auto ;
+padding: 2.5rem;
 
 }
 
 .presentation{
-  max-width: 95%;
-  margin: 0 auto;
+  max-width: 100%;
+
 }
 img{
   width: 100%;

@@ -1,187 +1,208 @@
 <template>
+  <div class="photo-container">
+    <h1 class="title">{{ title }}</h1>
     <div class="photos-list">
       <div 
         v-for="(photo, index) in photos" 
         :key="index" 
-        class="photo"
+        class="photo-item"
         @mouseenter="showImage(index, $event)"
         @mouseleave="hideImage(index)"
+        @mousemove="updateImagePosition(index, $event)"
       >
         <div class="photo-wrapper">
           <div class="photo-name">
             <h1>{{ photo.name }}</h1>
+            <h1 class="trait">{{ photo.trait }}</h1>
             <h1>{{ photo.type }}</h1>
           </div>
         </div>
+        
+        <!-- Image de survol -->
+        <img 
+          v-if="activeImages[index]"
+          :src="activeImages[index].src" 
+          :alt="activeImages[index].alt" 
+          :style="activeImages[index].style"
+          class="hover-image"
+        />
       </div>
-  
-      <!-- Afficher les images dynamiquement -->
-      <img 
-        v-for="(img, idx) in activeImages" 
-        :key="idx" 
-        :src="img.src" 
-        :alt="img.alt" 
-        :style="img.style"
-      />
     </div>
-  </template>
-  
-  <script>
-  import { ref } from "vue";
-  import gsap from "gsap";
-  
-  export default {
-    setup() {
-      // Liste des awards (identique à ton tableau)
-      const photos = ref([
-        { name: "01", type: "Children" },
-        { name: "02", type: "Silver" },
-        { name: "03", type: "Portrait" },
-        { name: "04", type: "People" },
-      ]);
-  
-      // Tableau pour stocker les images actives
-      const activeImages = ref([]);
-      const imageExtensions = ['.jpg', '.webp', '.webp', '.jpg'];
-  
-      // Afficher l'image au survol
-      const showImage = (index, e) => {
-        const imgNumber = index + 1;
-        const imgExtension = imageExtensions[index] || '.jpg';
-  
-        // Créer un objet pour l'image
-        const newImg = {
+  </div>
+</template>
+
+<script>
+import { ref } from "vue";
+import gsap from "gsap";
+
+export default {
+  data() {
+    return {
+      title: 'photographie.',
+    }
+  },
+  setup() {
+    const photos = ref([
+      { name: "01-", type: "Children" },
+      { name: "02-", type: "Silver" },
+      { name: "03-", type: "Portrait" },
+      { name: "04-", type: "People" },
+      { name: "05-", type: "Alicante" },
+      { name: "06-", type: "Madrid" },  
+      { name: "07-", type: "Alberto Giacometti" },
+      { name: "08-", type: "Japon" },
+      { name: "09-", type: "Boston" },
+      { name: "10-", type: "Martine Frank" }
+    ]);
+
+    const activeImages = ref([]);
+    const imageExtensions = ['.jpg', '.webp', '.webp', '.jpg', '.jpg', '.jpg', '.jpg', '.jpg', '.jpg', '.jpg'];
+
+    const showImage = (index, e) => {
+      const imgNumber = index + 1;
+      const imgExtension = imageExtensions[index] || '.jpg';
+
+      if (!activeImages.value[index]) {
+        activeImages.value[index] = {
           src: `./img/${imgNumber}${imgExtension}`,
-          alt: `Award ${imgNumber}`,
+          alt: `Photo ${imgNumber}`,
           style: {
-            position: "absolute",
-            top: `${e.clientY - (-400)}px`, // Centre l'image sur la souris
-            left: `${e.clientX - 100}px`,
+            position: "fixed",
+            top: `${e.clientY - 200}px`,
+            left: `${e.clientX - 200}px`,
             width: "400px",
             height: "400px",
             objectFit: "cover",
-            scale: "0",
+            scale: 0.5,
+            opacity: 0,
             zIndex: 1000,
-          },
-          index: index, // Pour identifier quelle image supprimer
+            pointerEvents: "none",
+            transformOrigin: "center center",
+            filter: "brightness(1.1) contrast(1.1)",
+            boxShadow: "0 0 30px rgba(0,0,0,0.5)"
+          }
         };
-  
-        // Ajouter l'image au tableau
-        activeImages.value.push(newImg);
-  
-        // Animer l'image avec GSAP
-        gsap.to(newImg.style, {
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      };
-  
-      // Cacher l'image quand la souris quitte
-      const hideImage = (index) => {
-        const imgToRemove = activeImages.value.find(img => img.index === index);
-        if (imgToRemove) {
-          gsap.to(imgToRemove.style, {
-            scale: 0,
-            duration: 0.4,
-            ease: "power2.out",
-            onComplete: () => {
-              // Supprimer l'image du tableau après l'animation
-              activeImages.value = activeImages.value.filter(img => img.index !== index);
-            },
-          });
-        }
-      };
-  
-      return {
-        photos,
-        activeImages,
-        showImage,
-        hideImage,
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    will-change: transform;
-  }
-  
-  h1 {
-    text-transform: uppercase;
-    font-size: 72px;
-    line-height: 0.9;
-  }
-  
-  p {
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  
-  section {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .photos {
-    min-height: 100vh;
-    height: max;
-  }
-  
-  .photos p {
-    padding: 5px 20px;
-  }
-  
-  .photos-list {
-    margin-top: 4.5rem;
-    border-top: 0.5px solid white;
- 
-  }
-  
-  .photo {
-    height: 80px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-  
-  .photo-wrapper {
-    position: relative;
-    height: 240px;
-    will-change: transform;
-    transform: translateY(0);
-  }
-  
-  .photo-name {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    padding: 5px 15px;
-    cursor: pointer;
-    border-bottom: 0.5px solid #ffffff;
-    background-color: #000000;
-    color: #ffffff;
-    transition: all 0.6s ease-out;
-  }
-  
+      }
 
-  </style>
+      // Animation plus dynamique avec un effet "qui sort"
+      gsap.to(activeImages.value[index].style, {
+        scale: 1.5,
+        opacity: 1,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+        y: -50, // Fait "sortir" l'image vers le haut
+        rotation: gsap.utils.random(-5, 5) // Légère rotation aléatoire
+      });
+    };
+
+    const updateImagePosition = (index, e) => {
+      if (activeImages.value[index]) {
+        gsap.to(activeImages.value[index].style, {
+          top: `${e.clientY - 200}px`,
+          left: `${e.clientX - 200}px`,
+          duration: 0.2
+        });
+      }
+    };
+
+    const hideImage = (index) => {
+      if (activeImages.value[index]) {
+        gsap.to(activeImages.value[index].style, {
+          scale: 0.5,
+          opacity: 0,
+          duration: 0.5,
+          ease: "back.in(1.5)",
+          y: 50, // Fait "rentrer" l'image vers le bas
+          onComplete: () => {
+            activeImages.value[index] = null;
+          }
+        });
+      }
+    };
+
+    return {
+      photos,
+      activeImages,
+      showImage,
+      hideImage,
+      updateImagePosition
+    };
+  }
+};
+</script>
+
+<style scoped>
+.photo-container {
+  margin-top: 4rem;
+  display: flex; 
+  flex-direction: column;
+  margin-left: 30rem;
+}
+
+.title {
+  color: white;
+  font-size: 7rem;
+  border-bottom: 0.5px solid rgb(255, 255, 255); 
+  padding-bottom: 1rem;
+  display: inline-block;
+  max-width: max-content;
+  font-family:  "Imbue", serif;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 2rem;
+  line-height: 0.9;
+  font-weight: 300;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+.photos-list {
+  max-width: 67vw;
+  margin-top: 4.5rem;
+  border-top: 0.8px solid rgba(255, 255, 255, 0.105);
+}
+
+.photo-item {
+  position: relative;
+  height: 80px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.photo-wrapper {
+  position: relative;
+  height: 100%;
+  will-change: transform;
+}
+
+.photo-name {
+  padding: 0 1rem;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  cursor: pointer;
+  border-bottom: 0.8px solid rgba(255, 255, 255, 0.105);
+  color: #ffffff;
+  transition: all 0.3s ease-out;
+  z-index: 1;
+}
+
+.photo-name:hover {
+  background-color: rgba(255, 255, 255, 0.105);
+  transform: translateX(10px);
+}
+
+.hover-image {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  will-change: transform, opacity;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+</style>
