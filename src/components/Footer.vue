@@ -47,6 +47,7 @@ export default{
 <style scoped>
 
   .footer{
+    overflow: hidden;
     margin-top: 5rem; 
     max-height: 100vh;
   }
@@ -90,7 +91,6 @@ p{
 
 .big{
     width: 100%;
-    overflow: hidden;
     margin: 0 auto;
     height: 220px;
 }
