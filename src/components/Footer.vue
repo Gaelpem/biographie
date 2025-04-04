@@ -90,7 +90,7 @@ p{
 
 .big{
     width: 100%;
-    overflow-y: hidden;
+    overflow: hidden;
     margin: 0 auto;
     height: 220px;
 }

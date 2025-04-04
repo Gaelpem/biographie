@@ -72,6 +72,7 @@ main {
   min-height: 55vh;
   margin: 0 auto;
   padding: 2.5rem;
+  overflow: hidden;
 }
 
 .presentation {
