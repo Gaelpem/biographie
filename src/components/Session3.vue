@@ -153,13 +153,14 @@ export default {
 }
 
 .title {
+  text-transform: uppercase;
   color: white;
   font-size: 7rem;
-  border-top: 0.7px solid white;
-  font-family:  "Imbue", serif;
+  border-bottom: 0.7px solid white;
+  font-family: "Josefin Sans", sans-serif;
 }
 
-h1 {
+.photo-name h1 {
   text-transform: uppercase;
   font-size: 2rem;
   line-height: 0.9;

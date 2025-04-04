@@ -11,13 +11,19 @@
 
     <Session2 />
     <Session3 />
+    <Session4 />
+    <Footer />
   </main>
+
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue';
 import Session2 from './components/Session2.vue';
 import Session3 from './components/Session3.vue';
+import Session4 from './components/Session4.vue';
+import Footer from './components/Footer.vue';
+
 import { gsap } from 'gsap';
 
 export default {
@@ -25,7 +31,9 @@ export default {
   components: {
     Navbar,
     Session2,
-    Session3
+    Session3, 
+    Session4, 
+    Footer
   },
   data() {
     return {
@@ -33,7 +41,7 @@ export default {
     };
   },
   mounted() {
-    // Crée une timeline GSAP
+    
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
     
     // Animation du conteneur
@@ -71,6 +79,8 @@ main {
   width: 100%;
   position: relative;
   overflow: hidden; /* Cache le débordement pendant l'animation */
+  border-bottom: 0.5px solid white;
+  padding-bottom: 2rem;
 }
 
 .presentation img {
@@ -83,13 +93,12 @@ main {
 
 h1 {
   color: white;
-  font-family: "Imbue", serif;
-  font-weight: 200;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 600;
   font-size: 8rem;
   position: absolute;
   bottom: 2rem;
   left: 2rem;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Améliore la lisibilité */
 }
 </style>

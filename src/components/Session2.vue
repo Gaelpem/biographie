@@ -2,7 +2,7 @@
   <div class="description">
     <div class="body">
       <div class="text-container" ref="textContainer">
-        <p id="text">
+        <p id="text"> &nbsp; &nbsp; &nbsp;
           <template v-for="(segment, index) in textSegments" :key="index">
             <span v-if="segment.isWord" class="mask">
               <span 
@@ -80,8 +80,12 @@ onMounted(() => {
 
 <style scoped>
 .description {
-  padding: 2px;
-  margin-top: 1rem;
+  padding: 1rem 2rem;
+  margin-top: 7.3rem;
+
+  border-radius: 7px;
+  position: relative;
+  
 }
 
 
@@ -90,15 +94,30 @@ onMounted(() => {
 }
 
 .text-container p {
-  border-top: 0.2px solid rgba(255, 255, 255, 0.315);
-  padding-top: 15px;
-  color: rgba(255, 255, 255, 0.516);
+ 
+  margin-left: 0;
+  color: rgb(255, 255, 255);
   font-size: 2.7rem;
   font-family: "Inter", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   width: 80%;
-
+  text-align: justify;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid white;
 }
+
+.text-container p::after {
+content: "";
+position: absolute;
+background-color: rgb(255, 255, 255);
+height: 60px;
+width: 60px;
+right: 15px;
+border-radius: 50%;
+top: 15px;
+}
+
+
 
 /* Animation */
 .mask {
