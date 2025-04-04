@@ -104,10 +104,9 @@ export default{
 }
 
 .item img{
-    width: 60%;
+    width: 61%;
     height:100%; 
     object-fit: cover;
-    
 }
 
 </style>

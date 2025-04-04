@@ -16,7 +16,6 @@
   </main>
 
 </template>
-
 <script>
 import Navbar from './components/Navbar.vue';
 import Session2 from './components/Session2.vue';
