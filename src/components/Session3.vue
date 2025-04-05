@@ -67,7 +67,7 @@ export default {
     ]);
 
     const activeImages = ref([]);
-    const imageExtensions = ['.jpg', '.webp', '.webp', '.jpg', '.jpg', '.jpg', '.jpg', '.jpg', '.jpg', '.jpg'];
+    const imageExtensions = ['.jpg', '.webp', '.webp', '.jpg', '.webp', '.webp', '.webp', '.webp', '.webp', '.webp'];
 
     const showImage = (index, e) => {
       const imgNumber = index + 1;

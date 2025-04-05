@@ -20,23 +20,23 @@
             </div>
            
             <div class="item">
-                <img :src=" './img/5.jpg'"  alt="image">
+                <img :src=" './img/5.webp'"  alt="image">
          
             </div>
        
             <div class="item">
-                <img :src=" './img/6.jpg'"  alt="image">
+                <img :src=" './img/6.webp'"  alt="image">
            
             </div>
         
             <div class="item">
-                <img :src=" './img/7.jpg'"  alt="image">
+                <img :src=" './img/7.webp'"  alt="image">
             </div>
             <div class="item">
-                <img :src=" './img/8.jpg'"  alt="image">
+                <img :src=" './img/8.webp'"  alt="image">
             </div>
             <div class="item">
-                <img :src=" './img/9.jpg'"  alt="image">
+                <img :src=" './img/9.webp'"  alt="image">
             </div>
             <div class="item">
                 <img :src=" './img/10.jpg'"  alt="image">

@@ -93,6 +93,7 @@ p{
     overflow-y: hidden;
     margin: 0 auto;
     height: 220px;
+    border: 1px solid red;
 }
 
 .big h1{
