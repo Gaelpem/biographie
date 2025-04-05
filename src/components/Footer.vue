@@ -49,6 +49,8 @@ export default{
   .footer{
     margin-top: 5rem; 
     max-height: 100vh;
+    position: relative;
+  z-index: 10;
   }
 .container{
     display: flex;
@@ -93,13 +95,18 @@ p{
     overflow-y: hidden;
     margin: 0 auto;
     height: 220px;
-    border: 1px solid red;
 }
 
-.big h1{
-    color: white;
-    text-transform: uppercase;
-    font-size: 17rem;
-    font-family: "Josefin Sans", sans-serif;
+.big h1.titre {
+  display: block;
+  width: 100%;
+  max-width: 100vw; 
+  text-transform: uppercase;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: min(17rem, 15vw); /* Taille responsive */
+  text-align: center;
 }
 </style>
